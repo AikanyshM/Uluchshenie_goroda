@@ -1,9 +1,6 @@
 from django.db import models
-from django.contrib.auth import get_user_model
-from django.utils.translation import gettext_lazy as _
+from account.models import User
 
-
-User = get_user_model()
-
-class Citizen(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name = _("Гражданин"))
+class Category(models.Model):
+    title = models.CharField(max_length=100, verbose_name = "Название категории")
+    text = models.TextField(verbose_name = "Описание категории")
