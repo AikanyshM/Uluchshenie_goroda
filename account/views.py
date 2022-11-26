@@ -3,7 +3,7 @@ from tokenize import Token
 from django.shortcuts import render
 from .models import User, Citizen, AdminUser
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
-from .serializers import CitizenCreateSerializer, CitizenSerializer, UserSerializer, UserCreateSerializer
+from .serializers import CitizenCreateSerializer, CitizenSerializer, UserCreateSerializer
 from rest_framework.views import APIView
 from rest_framework.generics import CreateAPIView
 from rest_framework.viewsets import ModelViewSet

@@ -1,3 +1,4 @@
+from asyncore import read
 from rest_framework import serializers
 from .models import User, Citizen, AdminUser
 from rest_framework.validators import UniqueValidator
@@ -25,26 +26,26 @@ class UserCreateSerializer(serializers.ModelSerializer):
         user.save()
 
 
-class UserSerializer(serializers.ModelSerializer):
 
-    class Meta:
-        model = User
-        fields = ["email", "first_name", "last_name"]
-        read_only_fields = ['username',]
+# class UserSerializer(serializers.ModelSerializer):
+
+#     class Meta:
+#         model = User
+#         fields = ["email", "first_name", "last_name"]
+#         read_only_fields = ['username',]
 
 class CitizenSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
-
     class Meta:
         model = Citizen
         fields = "__all__"
-
+        read_only_fields = ['user', ]  
+         
 class CitizenCreateSerializer(UserCreateSerializer):
     citizen = CitizenSerializer()
 
     class Meta:
         model = User
-        fields = ["citizen", "username", "password", "password2", 'email', 'first_name', 'last_name']
+        fields = ["citizen", "username", "password", "password2"]
         extra_kwargs = {
             'email': {'required': True},
             'first_name': {'required': True},
@@ -61,11 +62,15 @@ class CitizenCreateSerializer(UserCreateSerializer):
                     )
         user.set_password(self.validated_data['password'])
         user.save()
-
-        citizen = Citizen(
-            user=user, 
-            INN=self.validated_data['citizen']['INN'],
-            email=self.validated_data['citizen']['email'],
-            )
-        citizen.save()
-        return user
+        try:
+            citizen = Citizen(
+                user=user, 
+                INN=self.validated_data['citizen']['INN'],
+                email=self.validated_data['citizen']['email'],
+                )
+            citizen.save()
+        except Exception as e:
+            print(e)
+            user.delete()
+        else:
+            return user
