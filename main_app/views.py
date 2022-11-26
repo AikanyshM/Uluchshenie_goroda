@@ -1,3 +1,23 @@
 from django.shortcuts import render
+from .models import *
+from .serializers import *
+from rest_framework import authentication
+from rest_framework import permissions
+from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny, IsAdminUser
+from rest_framework import filters
 
-# Create your views here.
+
+class CategoryModelViewSet(ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = [IsAuthenticatedOrReadOnly,]
+
+
+class NewsViewSet(ModelViewSet):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
+    filter_backends = [filters.OrderingFilter,]
+    ordering_fields = ['date', ]
+    permission_classes = [IsAuthenticatedOrReadOnly,]
