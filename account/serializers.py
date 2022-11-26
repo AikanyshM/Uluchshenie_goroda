@@ -45,7 +45,7 @@ class CitizenCreateSerializer(UserCreateSerializer):
 
     class Meta:
         model = User
-        fields = ["citizen", "username", "password", "password2"]
+        fields = ["citizen", "username", "password", "password2", 'email', 'first_name', 'last_name']
         extra_kwargs = {
             'email': {'required': True},
             'first_name': {'required': True},
