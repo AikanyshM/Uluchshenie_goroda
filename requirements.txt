@@ -11,3 +11,4 @@ djangorestframework-simplejwt==5.2.2
 psycopg2-binary==2.9.5
 PyJWT==2.6.0
 pytz
+django-cors-headers==3.13.0
