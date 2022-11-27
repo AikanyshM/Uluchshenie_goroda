@@ -156,5 +156,5 @@ CORS_ORIGIN_ALLOW_ALL = False
 
 CORS_ORIGIN_WHITELIST = (
 
-       "http://92.62.73.200:3000/",
+    "http://92.62.73.200:3000/",
 )
