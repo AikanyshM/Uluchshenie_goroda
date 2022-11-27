@@ -11,7 +11,6 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.token_blacklist.models import BlacklistedToken, OutstandingToken
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.authentication import TokenAuthentication, SessionAuthentication
 
 
 class MyObtainTokenPairView(TokenObtainPairView):
@@ -21,7 +20,6 @@ class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     permission_classes = (AllowAny,)
     serializer_class = CitizenCreateSerializer
-    authentication_classes = [TokenAuthentication, SessionAuthentication]
 
 
     def perform_create(self, serializer):
@@ -43,7 +41,6 @@ class UserProfile(generics.RetrieveUpdateDestroyAPIView):
     queryset = Citizen.objects.all()
     serializer_class = CitizenSerializer
     permission_classes = (IsAuthenticated,)
-    authentication_classes = [TokenAuthentication, SessionAuthentication]
 
     def get_object(self):
         return self.queryset.get(pk=self.request.user.citizen.id)
