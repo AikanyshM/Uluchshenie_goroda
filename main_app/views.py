@@ -13,7 +13,7 @@ class CategoryModelViewSet(ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = [IsAuthenticatedOrReadOnly,]
-
+    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
 
 class NewsViewSet(ModelViewSet):
     queryset = News.objects.all()
@@ -21,3 +21,12 @@ class NewsViewSet(ModelViewSet):
     filter_backends = [filters.OrderingFilter,]
     ordering_fields = ['date', ]
     permission_classes = [IsAuthenticatedOrReadOnly,]
+    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
+
+class ApplicationViewSet(ModelViewSet):
+    queryset = Application.objects.all()
+    serializer_class = ApplicationSerializer
+    filter_backends = [filters.OrderingFilter,]
+    ordering_fields = ['date', 'category',]
+    permission_classes = [IsAuthenticatedOrReadOnly,]
+    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]

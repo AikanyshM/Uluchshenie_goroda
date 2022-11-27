@@ -10,3 +10,12 @@ class News(models.Model):
     description = models.TextField(verbose_name='Описание новости')
     main_photo = models.ImageField(verbose_name=('Фото новости'), upload_to='news_main_image')
     date = models.DateField(auto_now_add=True, verbose_name= 'Дата новости')
+
+class Application(models.Model):
+    title = models.CharField(max_length=150, verbose_name = "Заголовок заявки")
+    text = models.TextField()
+    application_photo = models.ImageField(verbose_name='Фото', upload_to='application_image')
+    date = models.DateField(auto_now_add=True, verbose_name= 'Дата заявки')
+    location = models.CharField(max_length=150, verbose_name="Адрес происшествия")
+    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='Пользователь')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Выберете категорию')

@@ -65,8 +65,7 @@ class CitizenCreateSerializer(UserCreateSerializer):
         try:
             citizen = Citizen(
                 user=user, 
-                INN=self.validated_data['citizen']['INN'],
-                email=self.validated_data['citizen']['email'],
+                INN=self.validated_data['citizen']['INN']
                 )
             citizen.save()
         except Exception as e:
