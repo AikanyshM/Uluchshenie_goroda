@@ -146,4 +146,5 @@ LOGIN_REDIRECT_URL = '/auth/profile/'
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     "http://localhost:3000",
+    "http://92.62.73.200/",
 ]
