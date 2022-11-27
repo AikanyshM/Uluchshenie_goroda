@@ -1,3 +1,4 @@
+from tabnanny import verbose
 from django.db import models
 from account.models import User
 
@@ -18,7 +19,7 @@ class News(models.Model):
 
 class Application(models.Model):
     title = models.CharField(max_length=150, verbose_name = "Заголовок заявки")
-    text = models.TextField()
+    text = models.TextField(verbose_name="Описание заявки")
     application_photo = models.ImageField(verbose_name='Фото', upload_to='application_image')
     date = models.DateField(auto_now_add=True, verbose_name= 'Дата заявки')
     location = models.CharField(max_length=150, verbose_name="Адрес происшествия")
