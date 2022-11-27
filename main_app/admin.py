@@ -8,5 +8,5 @@ class CategoryAdmin(admin.ModelAdmin):
 class NewsAdmin(admin.ModelAdmin):
     list_display = ('name', 'description', 'main_photo', 'date')
 
-# class Application(admin.ModelAdmin):
-#     list_display = 
+class Application(admin.ModelAdmin):
+    list_display = ('name', 'description')
