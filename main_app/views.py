@@ -12,7 +12,7 @@ from rest_framework import filters
 class CategoryModelViewSet(ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    permission_classes = [IsAuthenticatedOrReadOnly,]
+    permission_classes = [AllowAny,]
     authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
 
 class NewsViewSet(ModelViewSet):
@@ -20,7 +20,7 @@ class NewsViewSet(ModelViewSet):
     serializer_class = NewsSerializer
     filter_backends = [filters.OrderingFilter,]
     ordering_fields = ['date', ]
-    permission_classes = [IsAuthenticatedOrReadOnly,]
+    permission_classes = [AllowAny, ]
     authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
 
 class ApplicationViewSet(ModelViewSet):
@@ -28,5 +28,5 @@ class ApplicationViewSet(ModelViewSet):
     serializer_class = ApplicationSerializer
     filter_backends = [filters.OrderingFilter,]
     ordering_fields = ['date', 'category',]
-    permission_classes = [IsAuthenticatedOrReadOnly,]
+    permission_classes = [AllowAny, ]
     authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
